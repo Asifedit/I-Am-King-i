@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalnia:wght@500&family=Rubik+Bubbles&display=swap" rel="stylesheet">
+    <style>
+        body {
+          
+            font-family: 'Arial', sans-serif;
+            margin: 0px;
+            padding: 40;
+            background-color: #1000; /* Set the initial background color */
+            transition: background-color 0.3s ease-in-out; /* Adding transition for smooth background color change */
+        }
+
+     
+
+
+        @keyframes rotateSquare {
+            0% {
+                transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            }
+            100% {
+                transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+            }
+        }
+
+        #menuIcon {
+            position: absolute;
+            top: 11px;
+            left: 19px;
+            cursor: pointer;
+            z-index: 2; /* Ensure the icon is above other elements */
+        }
+
+        #closeIcon {
+            position: absolute;
+            top: 18px;
+            left: 19px;
+            cursor: pointer;
+            display: none;
+            z-index: 2; /* Ensure the icon is above other elements */
+        }
+
+        #menuIcon::before,
+        #closeIcon::before {
+            content: "\2630"; /* Unicode character for three horizontal lines (☰) */
+            font-size: 30px;
+            color: #fff;
+            transition: transform 0.3s ease-in-out; /* Adding transform transition for icon animations */
+        }
+
+        #closeIcon::before {
+            content: "\2716"; /* Unicode character for a cross (✖) */
+        }
+
+        #menu {
+            position: absolute;
+            top: 0px;
+            left: -300px; /* Initial position outside the viewport */
+            width: 369px;
+            height: 40vh;
+            background: #333;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out; /* Adding fade-in transition for the submenu */
+        }
+
+        #menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 90px 0 0 0;
+        }
+
+        #menu li {
+            padding: 15px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #header {
+            text-align: center;
+            padding: 20px;
+            background-color: #100;
+            cor: #bff;
+            transition: background-color 0.3s ease-in-out; /* Adding transition for smooth background color change */
+        }
+
+        #name {position: fixed;
+             right:100px;
+             top:20px;
+            display: inline-block;
+            font-size: 30px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.5), 0 0 40px rgba(255, 0, 0, 0.5), 0 0 50px rgba(255, 0, 0, 0.5); /* Neon light effect */
+            transition: all 0.3s ease-in-out;
+            animation: zoomInOut 1s infinite alternate; /* Zoom in and out animation */
+        }
+#ee {
+            display: inline-block;
+            font-size: 20px;
+            text-shadow: 0 0 10px rgba(265, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.5), 0 0 40px rgba(255, 0, 0, 0.5), 0 0 50px rgba(255, 0, 0, 0.5); /* Neon light effect */
+            transition: all 0.3s ease-in-out;
+            animation: zoomInOut 1s infinite alternate; /* Zoom in and out animation */
+        }
+        
+        }
+
+        body:hover {
+            background-color: white; /* Changing background color on body hover */
+        top:100px;
+        }
+
+        @keyframes zoomInOut {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.2);
+            }
+        }
+        #par {
+        margin: 5px;
+        border: 5px solid #1000; /* Adjust the color as needed */
+        padding: 5px; /* Add padding for better visibility */
+        }
+        
+        #startButton, #progressBarContainer, #nextButton, #overlay, #scrollDownMessage {
+        margin: 5px;
+        }
+        
+        #progressBarContainer {
+        display: none;
+        position: adjective;
+        margin-top:69px;}
+        
+     
+        
+        #blinkingText {
+        position: adjective;
+        animation: blink 2s infinite;
+        top:20px;
+        color:red;
+        justify-content: center;
+        }
+        
+        @keyframes blink {
+        90% {
+        opacity: 0;
+        }
+        }
+        
+        #progressBar {
+        width: 100%;
+        height: 30px;
+        border-radius: 100px;
+        background-color: #eee;
+        overflow: hidden;
+        margin-top: 20px;
+        }
+        
+        #progressBar div {
+        height: 100%;
+        width: 0;
+        border-radius: 8px;
+        background-color: #009988;
+        animation: progressAnimation 2s ease-in-out forwards;
+        }
+        
+        @keyframes progressAnimation {
+        0% {
+        width: 0;
+        }
+        0% {
+        width: 0%;
+        }
+        }
+        
+        #loadingPercentage {
+        margin-top: -44px;
+        
+        }
+        
+        #scrollDownMessage {
+        display: none;
+        color: #009688;
+        font-size: 18px;
+        }
+        #startButton{
+        color:green;
+        whidth:500px;
+        font-size: 30px;
+        margin-top: 60px;
+        background-color: #4CAF50;
+        color: #fff;
+        right:50px;
+        }
+        
+        #nextButton{
+        color:green;
+        whidth:500px;
+        font-size: 30px;
+        margin-top: 0px;
+        background-color: #4CAF50;
+        color: #fff;}
+      h2{
+      
+      color:#990ffe;
+      }
+      h4{
+     font-family:Rubik+Bubbles;
+      color:#000;}
+      
+      #banner {
+      position: fixed;
+      Top: 0;
+      left: 0;
+      width: 100%;
+      HEIGHT:69px;
+      background-color: #007BFF;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      }
+    
+    </style>
+</head>
+<body>
+
+    <div id="loadingOverlay">
+        <div id="loadingpinner">
+            <div id="loadingSquare"></div>
+        </div>
+    </div>
+
+    
+    <div id="banner"> <div id="menuIcon" onclick="toggleMenu()"></div>
+
+    <div id="menu">
+        <ul>
+           <h2> <li><a href="404 worning.html" >Our offers</a></li></h2>
+           
+        </ul>
+    </div>
+
+   <div id="banner"> 
+       <center> <div id="name">Asif Edit</div></center>
+        <div id="closeIcon" onclick="toggleMenu()"></div>
+    </div></div>
+    
+   <div id="par"><p>
+    
+    <br><br><br>
+    
+   <h4> Hi! I’m  Asif Edit. On my Website , you will find Editing video . I love editing and sharing my experiences with you. 
+   
+   
+   
+   
+   scribe to see more Editing video ,preset video , and Blog on your feed!  don’t forget to turn on your notifications! 
+    
+   <br><br> <IMG SRC="20231207_202243.jpg" WIDTH="338" HEIGHT="201" BORDER="5" ALT="asif edit">	
+  
+    
+  
+    
+    
+    <center><button id="startButton" onclick="startLoading()">Get Xml</button>
+    </center><div id="progressBarContainer">
+    <div id="overlay">
+   
+    </div>
+    <div id="progressBar">
+    <div></div>
+    </div> <center><div id="blinkingText">Loading...</div></center>
+    <center><div id="loadingPercentage">0%</div></center>
+    </div>
+   <center> <div id="scrollDownMessage">Scroll down </div></center>
+    
+    
+    
+    <br>
+    </h4>
+    
+    
+   <h2> About This Video : </h2>
+    
+    <h4 >Boy Attitude Stutas 😏|| I Am ..... 😈|| self Attitude 👑|| Emperor of Self-Style 👑 ||</h4>
+    
+    
+    
+    
+   <h2> 📌 Topic Covered In This Video : </h2>
+    
+   <h4> whatsapp Status | black screen status |  overlay lyrics 
+    
+    </h4>
+   <b> ✔ new trend alight motion xml<br>
+    ✔ alight motion xml<br>
+    ✔ trend XML<br>
+    ✔ new trend alight motion XML file <br>
+    
+    </b></h4>
+    
+    
+   <center> <u><h2>• Used app for EDIT : 🔳</h2>
+    🔹Capcut<br>
+    ◾Alight Motion <br>
+    🔸KineMaster<br>
+    ◽Inshot<br>
+    </u></center>
+    
+    
+    
+    
+   <center> <h2><footer>IF YOU WANT XML 
+    SCROLL DOWN 👇</footer></h2></center>
+    
+    
+    
+    
+  <h2>  ⏸️ Video related information :<h2>
+  <h4> <b> - Edit by : Asif Edit (me)
+    - Music : ----
+    - Trending chat lyrics xml status 
+    - XML present 
+    - Alight motion editing  </b></h4>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   <h2> Hello guys welcome to our Website Asif Edit thanks for watching my Post, I hope you enjoy our Post </h2>
+    
+    
+    
+    
+   <h2> ⚪About Channel :</h2>
+    <h4>🚀if you are a passenger on my ship, you are part of my family too :) 
+    Happens on this channel :<h4>
+    
+   <li> ◻️ Alight motion XML<br></li>
+    <li>◻️ Alight motion preset video<br></li>
+    <li>◻️ Alight motion photo editing<br></li>
+    <li>◻️ Alight motion XML video<br></li>
+    <li>◻️ Alight motion XML file<br></li>
+    <li>◻️ WhatsApp status<br> </li>
+    
+    
+    
+   <h2> 🎬 Editing App </h2>
+    <li>✯ Alight motion</li>
+    <li>✯ Cup cut</li> 
+   <li> ✯ Kingmaster  </li>
+   <li> ✯ Pixelab </li>
+    
+    
+    
+    
+    
+    
+   <h2> - Assalamu Alaikum.!🙆‍♂️🖤 »»</h2>
+   <h4> If you like this video, Please give a 𝐋𝐢𝐤𝐞 🙂🌸 Visit my channel ; and 𝐒𝐮𝐛𝐬𝐜𝐫𝐢𝐛𝐞 for get more this type of 𝐗𝐌𝐋 preset video ☺️🎥 «« 
+    </h4>
+    
+    
+    
+    <h2>🎦 VIDEO'S CONTENT :</h2>
+   <li> ➡ Tiktok video editing</li>
+  <li>  ➡ Likee video editing</li>
+    <li>➡ Professional video editing </li>
+    
+    
+    
+   <h2> MORE SCROLL FOR
+    XML LINK 👇 </h2>
+    
+    
+    
+    
+    
+   <h2> I'M EDITING THIS TYPE VIDEO IN MY YOUTUBE CHANNEL ✨ </h2>
+  
+    
+ 
+    
+    
+    
+    
+    
+   <h2> XML DOWNLOAD BATTON</h2>
+    
+   <center> <button id="nextButton" style="display: none;" onclick="showNextButton()"herf="">Download Now</button></center>
+    
+    
+    
+    
+    
+    
+    
+    
+    <h4>The Xml must be opened first to use it. So for that you click on the download button. And after 10 seconds of clicking, the Xml will be opened automatically. 
+    
+    
+    </h4>
+    
+    
+   <a href="https://www.youtube.com/@Asifedit748" >GO MY YOUTUBE CHANNEL FOR THIS TYPE VIDEO</a> </div></center>
+    
+    
+    <br><br>
+    
+   <center> <div id="ee">Thank for visiting ❤️</div></center>
+    
+  <br>  🅂🄷🄰🅁🄴 🅃🄷🄸🅂 🅃🄾 🅈🄾🅄🅁 🄵🅁🄸🄴🄽🄳 🄰🄻🅂🄾 💟 
+    
+    </h4>
+    
+
+    <script>
+        window.addEventListener('load', function () {
+            var loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.style.opacity = '0';
+            setTimeout(function () {
+                loadingOverlay.style.display = 'none';
+            }, 3000); // Set the timeout to 3000 milliseconds (3 seconds)
+        });
+
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            var closeIcon = document.getElementById('closeIcon');o
+            var menuIcon = document.getElementById('menuIcon');
+
+            if (menu.style.left === '0px') {
+                menu.style.left = '-300px';
+                closeIcon.style.display = 'none';
+                menuIcon.style.display = 'block';
+                menu.style.opacity = '0';
+            } else {
+                menu.style.left = '0px';
+                closeIcon.style.display = 'block';
+                menuIcon.style.display = 'none';
+                menu.style.opacity = '1';
+            }
+        }
+        function startLoading() {
+        document.getElementById('startButton').style.display = 'none';
+        document.getElementById('progressBarContainer').style.display = 'block';
+        
+        let progressBar = document.getElementById('progressBar').querySelector('div');
+        let overlay = document.getElementById('overlay');
+        let loadingPercentage = document.getElementById('loadingPercentage');
+        let nextButton = document.getElementById('nextButton');
+        let scrollDownMessage = document.getElementById('scrollDownMessage');
+        
+        let progressValue = 2;
+        let loadingInterval = setInterval(function () {
+        progressValue += 7;
+        progressBar.style.width = progressValue + '%';
+        loadingPercentage.textContent = progressValue + '%';
+        
+        if (progressValue >= 100) {
+        clearInterval(loadingInterval);
+        nextButton.style.display = 'block';
+        setTimeout(function () {
+        overlay.style.display = 'none';
+        document.getElementById('progressBarContainer').style.display = 'none';
+        scrollDownMessage.style.display = 'block';
+        }, 800); // Delay for a smoother transition
+        }
+        }, 1100); // Increase the interval to 1000ms (1 second) for testing
+        }
+        
+        function showNextButton() {
+        window.location.href = "https://drive.google.com/file/d/17motNo56yaJ_CGGWhqgAdklCWJCLfgpQ/view?usp=drivesdk"; // Replace with your Google Drive file link
+        
+        
+        }
+        
+        
+    </script>
+</body>
+</html>>
